@@ -12,7 +12,6 @@ class Score(Turtle):
         self.color("white")
         self.write(f"{self.live_score2} : {self.live_score1}", font=("Arial", 40, "normal"))
 
-
     def score_update(self):
         self.clear()
         self.write(f"{self.live_score2} : {self.live_score1}", font=("Arial", 40, "normal"))

@@ -39,7 +39,7 @@ screen.update()
 game_on = True
 while game_on:
     
-    time.sleep(0.1)
+    time.sleep(ball.more_speed)
     ball.move()
 
     if ball.ycor() > (HEIGHT/2)-30 or ball.ycor() < -(HEIGHT/2)+30:
