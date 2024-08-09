@@ -11,10 +11,6 @@ class Ball(Turtle):
         self.speed(1)
         self.y_move = 10
         self.x_move = 10
-    
-    def move1(self):
-        self.setheading(300)
-        self.forward(20)
         
     def move(self):
         new_y = self.ycor()+self.y_move
@@ -29,5 +25,6 @@ class Ball(Turtle):
         print(f"paddle bounce back at: {self.xcor()}")
         self.x_move *= -1
     
-
-    
+    def start(self):
+        self.goto(0,0)
+        self.x_move *= -1

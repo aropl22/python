@@ -1,6 +1,7 @@
 from turtle import Turtle, Screen
 from players import Paddle
 from ball import Ball
+from score import Score
 import time
 
 
@@ -22,8 +23,7 @@ screen.tracer(0)
 paddle1 = Paddle(PADDLE_X_POS)
 paddle2 = Paddle(-PADDLE_X_POS)
 ball = Ball()
-# paddle1 = Paddle()
-# paddle2 = Paddle()
+score = Score()
 
 screen.update()
 
@@ -38,29 +38,25 @@ screen.update()
 
 game_on = True
 while game_on:
-    time.sleep(0.1)
     
+    time.sleep(0.1)
     ball.move()
 
     if ball.ycor() > (HEIGHT/2)-30 or ball.ycor() < -(HEIGHT/2)+30:
         ball.bounce()
     elif ball.xcor() > 370:
-        print(f"player1 lost - ball at {ball.pos()}")
-        print(f"paddle at {paddle1.pos()}")
-        game_on = False
+        score.live_score2 += 1
+        score.score_update()
+        #game_on = False
+        ball.start()
     elif ball.xcor() < -370:
-        print(f"player2 lsot - ball at {ball.pos()}")
-        print(f"paddle at {paddle2.pos()}")
-        game_on = False
+        score.live_score1 += 1
+        score.score_update()
+        #game_on = False
+        ball.start()
     elif (ball.xcor() > 330 and ball.distance(paddle1) < 56) or (ball.xcor() < -330 and ball.distance(paddle2) < 56):
         ball.paddle_hit()
     
     screen.update()
 
-    # if (ball.xcor() > 436 or ball.xcor() < -436) and (ball.distance(paddle1) < 51 or ball.distance(paddle2)) < 51:
-    #     print("Maid contact")
-    #     ball.player_hit()
-
-    #time.sleep(0.1)
-    #time.sleep(2)
 screen.exitonclick()
