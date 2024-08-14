@@ -21,14 +21,10 @@ class Car(Turtle):
             round(random.randint(100,255)),
             round(random.randint(100,255))
         )
-        
-        #print(ran_color)
         self.color(ran_color)
-        #sety = (random.randint(-self.screen_height/2+60,self.screen_height/2-60))
         self.goto(screen_width/2-40, car_ypos)
-        print(f"car position: {self.pos()}")
         self.free = False
 
     def car_move(self):
         """randomly moves car object to the left"""
-        self.goto(self.xcor()-random.randint(20,80),self.ycor())
+        self.goto(self.xcor()-random.randint(10,50),self.ycor())

@@ -22,7 +22,6 @@ class Environment(Turtle):
 
         # draw road
 
-        print(f"{self.pencolor()}")
         self.goto(-self.screen_width/2, self.screen_height/2-40)
         self.pendown()
         self.goto(self.screen_width/2, self.screen_height/2-40)
@@ -44,7 +43,6 @@ class Environment(Turtle):
             line_y_pos = line_start_height-line_width
             self.goto(-self.screen_width/2,line_y_pos)
             self.car_lines.append(line_y_pos - line_width/2)
-            print(f"line {line}: {self.pos()}")
             progress = -self.screen_width/2
 
             while progress < self.screen_width/2:

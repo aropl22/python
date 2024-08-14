@@ -2,6 +2,7 @@ from turtle import Turtle, Screen
 from environment import Environment
 from madman import Madman
 from cars import Car
+from score import Score
 import time
 import random
 
@@ -17,6 +18,7 @@ TITLE = "LA Highway Crossing"
 
 cars = []
 available_cars = []
+level = 1
 
 screen = Screen()
 screen.setup(width=SCREEN_WIDTH, height=SCREEN_HEIGHT)
@@ -31,6 +33,8 @@ road.draw_street()
 
 madman = Madman(SCREEN_WIDTH, SCREEN_HEIGHT)
 madman.start()
+
+score = Score()
 
 traffic = {key:[] for key in road.car_lines}   #create dictionary with keys from car_lines list and empty lists as values
 
@@ -61,6 +65,7 @@ screen.onkey(madman.move_up, "Up")
 
 game_on = True
 
+speed_level = 0
 
 while game_on:
 
@@ -70,12 +75,8 @@ while game_on:
         if car.free:
             proposed_placement = random.choice(road.car_lines)    
             car.car_placement(road.screen_width,proposed_placement)
-            print(traffic)
-            print(f"temp: {traffic[proposed_placement][-1].pos()}")
-            print(f"car: {car.pos()}")
-            print(f"distance: {car.distance(traffic[proposed_placement][-1])}")
-            print(f"distance: {car.distance(traffic[proposed_placement][-1]) > 150}")
-            if car.distance(traffic[proposed_placement][-1]) > 150:
+            time.sleep(random.uniform(0.03,0.09))
+            if car.distance(traffic[proposed_placement][-1]) > 200:
                 traffic[proposed_placement].append(car)
                 car.free = False
             else: 
@@ -85,7 +86,23 @@ while game_on:
             car.car_move()
             screen.update()
         else:
-            car.car_move() 
-        screen.update()  
+            car.car_move()
+
+        if car.xcor()<-400:
+            car.free = True
+
+    if madman.ycor() > 300:
+        score.level += 1
+        madman.goto(0,-SCREEN_HEIGHT/2+18)
+        score.score_update()
+    
+    for car in cars:
+        if not car.free and madman.distance(car) < 40:
+            game_on = False
+            score.game_over()
+            
+         
+    screen.update()
+screen.onkey(madman.do_nothing, "Up")  
 
 screen.exitonclick()

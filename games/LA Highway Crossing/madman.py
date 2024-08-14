@@ -20,5 +20,8 @@ class Madman(Turtle):
     def move_up(self):
         """move car 20 to the left"""
         self.sety(self.ycor()+20)
-        print(f"moved forward")
         self.screen.update()
+
+    def do_nothing(self):
+        """blocks 'move' key"""
+        self.goto(self.pos())
