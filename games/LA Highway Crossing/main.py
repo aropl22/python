@@ -65,7 +65,7 @@ screen.onkey(madman.move_up, "Up")
 
 game_on = True
 
-speed_level = 0
+speed = 10
 
 while game_on:
 
@@ -82,17 +82,17 @@ while game_on:
             else: 
                 car.goto(SCREEN_WIDTH/2+30, SCREEN_HEIGHT/2+30)
                 car.free = True
-
-            car.car_move()
+            car.car_move(speed)
             screen.update()
         else:
-            car.car_move()
+            car.car_move(speed)
 
         if car.xcor()<-400:
             car.free = True
 
     if madman.ycor() > 300:
         score.level += 1
+        speed = speed+3
         madman.goto(0,-SCREEN_HEIGHT/2+18)
         score.score_update()
     

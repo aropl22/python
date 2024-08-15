@@ -25,6 +25,6 @@ class Car(Turtle):
         self.goto(screen_width/2-40, car_ypos)
         self.free = False
 
-    def car_move(self):
+    def car_move(self,speed):
         """randomly moves car object to the left"""
-        self.goto(self.xcor()-random.randint(10,50),self.ycor())
+        self.goto(self.xcor()-random.randint(10,50)-speed,self.ycor())
